@@ -58,7 +58,7 @@ all: $(NAME)
 
 clean:
 	$(RM) $(RMFLAGS) $(wildcard $(OBJDIR)/*.o)
-	if [ -d $(OBJDIR) ]; then rm -Rf $(OBJDIR); fi
+	if [ -d $(OBJDIR) ]; then $(RM) -R $(RMFLAGS) $(OBJDIR); fi
 	make -C $(LIBFT_DIR) clean
 	make -C $(MLX_DIR) clean
 
@@ -66,6 +66,9 @@ fclean: clean
 	$(RM) $(RMFLAGS) $(NAME)
 	make -C $(LIBFT_DIR) fclean
 	make -C $(MLX_DIR) fclean
+
+libclean: fclean
+	$(RM) -R $(RMFLAGS) $(LIBDIR)
 
 re: fclean all
 
