@@ -6,11 +6,11 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:25:25 by arabenst          #+#    #+#             */
-/*   Updated: 2023/01/23 10:48:54 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/01/27 12:39:04 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	ft_count_c(char **map, char c)
 {
@@ -36,23 +36,24 @@ int	ft_count_c(char **map, char c)
 	return (count);
 }
 
-char	*ft_get_file_name(char c)
+int	ft_to_power(int nb, int power)
 {
-	char	*file_name;
+	if (power < 0)
+		return (0);
+	else if (power == 0)
+		return (1);
+	return (nb * ft_to_power(nb, power - 1));
+}
 
-	if (c == '1')
-		file_name = "Wall";
-	else if (c == '0')
-		file_name = "Path";
-	else if (c == 'P')
-		file_name = "Path";
-	else if (c == 'C')
-		file_name = "Collectible";
-	else if (c == 'E')
-		file_name = "Exit";
-	else if (c == 'A')
-		file_name = "Player_r";
-	else
-		file_name = "miss";
-	return (file_name);
+int	ft_count_digits(int n)
+{
+	int	count;
+
+	count = 0;
+	while (n >= 10)
+	{
+		n /= 10;
+		count++;
+	}
+	return (count);
 }

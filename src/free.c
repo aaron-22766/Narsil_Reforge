@@ -6,20 +6,26 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:24:03 by arabenst          #+#    #+#             */
-/*   Updated: 2023/01/23 10:48:41 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/01/27 09:21:55 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	ft_free_player(t_player *player)
 {
 	int	i;
 
 	i = 0;
+	while (player->enemies && player->enemies[i])
+		free(player->enemies[i++]);
+	free(player->enemies);
+	i = 0;
 	while (player->map[i])
 		free(player->map[i++]);
 	free(player->map);
+	free(player->moves_ui);
+	free(player->collects_ui);
 	free(player);
 }
 

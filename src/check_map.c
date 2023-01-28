@@ -6,24 +6,22 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:27:16 by arabenst          #+#    #+#             */
-/*   Updated: 2023/01/23 10:48:27 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/01/26 14:46:29 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static void	ft_check_rect(t_player *player)
 {
-	size_t	length;
-	int		i;
+	int	i;
 
-	length = ft_strlen(player->map[0]);
 	i = 0;
 	while (player->map[i])
 	{
 		if (ft_strlen(player->map[i]) <= 1)
 			ft_ferror(10, player);
-		if (ft_strlen(player->map[i]) != length)
+		if (ft_strlen(player->map[i]) != ft_strlen(player->map[0]))
 			ft_ferror(11, player);
 		i++;
 	}
@@ -46,7 +44,7 @@ static void	ft_check_components(t_player *player)
 		j = 0;
 		while (player->map[i][j])
 		{
-			if (!ft_strchr("10CEP", player->map[i][j]))
+			if (!ft_strchr("10CEPX", player->map[i][j]))
 				ft_ferror(14, player);
 			j++;
 		}
@@ -54,7 +52,7 @@ static void	ft_check_components(t_player *player)
 	}
 	if (ft_count_c(player->map, 'C') == 0)
 		ft_ferror(15, player);
-	if (ft_count_c(player->map, 'E') != 1)
+	if (ft_count_c(player->map, 'X') != 1)
 		ft_ferror(16, player);
 	if (ft_count_c(player->map, 'P') != 1)
 		ft_ferror(17, player);
@@ -91,9 +89,20 @@ static void	ft_check_walls(t_player *player)
 
 static void	ft_check_size(t_player *player)
 {
-	if (ft_strlen(player->map[0]) >= 82 || (ft_count_c(player->map, 0)
-			/ ft_strlen(player->map[0])) >= 44)
-		ft_printf("\nALERT!\nMap is bigger than what the iMac can display!\n");
+	char	answer;
+
+	if (ft_strlen(player->map[0]) < 82 && (ft_count_c(player->map, 0)
+			/ ft_strlen(player->map[0])) < 44)
+		return ;
+	ft_printf("\nALERT!\nMap is bigger than what the iMac can display! ");
+	ft_printf("Play anyway? (y/N) ");
+	scanf("%c", &answer);
+	if (answer != 'y')
+	{
+		ft_printf("\n");
+		ft_free_player(player);
+		exit(0);
+	}
 }
 
 void	ft_check_map(t_player *player)
@@ -103,5 +112,5 @@ void	ft_check_map(t_player *player)
 	ft_check_walls(player);
 	ft_check_path(player);
 	ft_check_size(player);
-	ft_printf("\nMap is valid!\nHelp Aragorn find all the shards of Narsil!\n\n");
+	ft_printf("\nHelp Aragorn find all the shards of Narsil!\n");
 }

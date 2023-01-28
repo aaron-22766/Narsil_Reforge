@@ -6,11 +6,11 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 00:40:08 by W2Wizard          #+#    #+#             */
-/*   Updated: 2023/01/23 10:48:52 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/01/26 11:37:06 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static char	**ft_realloc_map(char **ptr, size_t count)
 {
@@ -75,8 +75,11 @@ int	main(int argc, char **argv)
 		ft_error(0);
 	player->map = ft_get_map(fd);
 	close(fd);
+	player->enemies = 0;
+	player->moves_ui = 0;
+	player->collects_ui = 0;
 	if (!player->map)
-		ft_error(0);
+		ft_ferror(0, player);
 	ft_check_map(player);
 	player->sprite_path = argv[0];
 	ft_play(player);

@@ -6,105 +6,85 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:41:06 by arabenst          #+#    #+#             */
-/*   Updated: 2023/01/23 10:48:45 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/01/27 14:33:19 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
-static void	ft_on_collect(t_player *player)
+static void	ft_move_key(t_player *player, int x, int y)
 {
-	if (player->map[player->y][player->x] != 'C')
-		return ;
-	player->collects++;
-	if (player->collects == player->all_collects)
-		ft_printf("You have found all shards. Bring them to the anvil!\n");
-	else if (player->collects == 1)
-		ft_printf("You have found %i shard. Only %i more!\n",
-			player->collects, player->all_collects - player->collects);
-	else
-		ft_printf("You have found %i shards. Only %i more!\n",
-			player->collects, player->all_collects - player->collects);
-	player->map[player->y][player->x] = '0';
-	if (mlx_image_to_window(player->mlx, ft_get_img(player,
-				ft_get_file_name('0')), player->x * RES, player->y * RES) < 0)
-		ft_mlxerror(player);
-	mlx_delete_image(player->mlx, player->img_player);
-	player->img_player = ft_get_img(player, ft_get_file_name('A'));
-	if (mlx_image_to_window(player->mlx, player->img_player,
-			player->x * RES, player->y * RES) < 0)
-		ft_mlxerror(player);
+	player->key_down = 1;
+	ft_animate_player_move(player);
+	if (player->img->instances[0].x == player->x * RES
+		&& player->img->instances[0].y == player->y * RES)
+		ft_move(player, x, y);
 }
 
-static void	ft_on_exit(t_player *player)
+static void	ft_key_press(t_player *player)
 {
-	if (player->map[player->y][player->x] != 'E')
-		return ;
-	if (player->collects >= player->all_collects)
+	if (mlx_is_key_down(player->mlx, MLX_KEY_ESCAPE))
 	{
-		ft_printf("\nAgorel vae, mellon nin! ");
-		ft_printf("Aragorn was able to reforge the sword.\n\n");
+		ft_printf("\nYou closed the window using the ESC key.\n\n");
 		ft_terminate_free(player, 0);
 	}
-	else
-		ft_printf("You haven't found all shards yet!\n");
+	else if (mlx_is_key_down(player->mlx, MLX_KEY_UP)
+		|| mlx_is_key_down(player->mlx, MLX_KEY_W))
+		ft_move_key(player, 0, -1);
+	else if (mlx_is_key_down(player->mlx, MLX_KEY_DOWN)
+		|| mlx_is_key_down(player->mlx, MLX_KEY_S))
+		ft_move_key(player, 0, 1);
+	else if (mlx_is_key_down(player->mlx, MLX_KEY_LEFT)
+		|| mlx_is_key_down(player->mlx, MLX_KEY_A))
+		ft_move_key(player, -1, 0);
+	else if (mlx_is_key_down(player->mlx, MLX_KEY_RIGHT)
+		|| mlx_is_key_down(player->mlx, MLX_KEY_D))
+		ft_move_key(player, 1, 0);
 }
 
-static void	ft_move(t_player *player, int x, int y)
-{
-	if (player->map[player->y + y][player->x + x] == '1')
-		return ;
-	player->img_player->instances[0].x += x * RES;
-	player->img_player->instances[0].y += y * RES;
-	player->x += x;
-	player->y += y;
-	ft_printf("Moves: %i\n", ++player->moves);
-	ft_on_collect(player);
-	ft_on_exit(player);
-}
-
-static void	ft_keyhook(mlx_key_data_t keydata, void *param)
+static void	ft_hook(void *param)
 {
 	t_player	*player;
 
 	player = param;
-	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+	player->key_down = 0;
+	ft_key_press(player);
+	if (player->key_down)
+		player->key_hold++;
+	else
+		player->key_hold = 0;
+	if ((player->img->instances[0].x != player->x * RES
+			|| player->img->instances[0].y != player->y * RES)
+		&& player->key_down == 0)
+		ft_animate_player_move(player);
+	if (player->moves && ft_count_c(player->map, 'E') > 0 && !player->end)
+		ft_enemies(player);
+	if (player->end)
 	{
-		if (keydata.key == MLX_KEY_ESCAPE)
-		{
-			ft_printf("\nYou closed the window using the ESC key.\n\n");
-			ft_terminate_free(player, 0);
-		}
-		else if (keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_W)
-			ft_move(player, 0, -1);
-		else if (keydata.key == MLX_KEY_DOWN || keydata.key == MLX_KEY_S)
-			ft_move(player, 0, 1);
-		else if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_A)
-			ft_move(player, -1, 0);
-		else if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_D)
-			ft_move(player, 1, 0);
+		player->wait++;
+		if (player->frames == END_ANI)
+			player->frames = 0;
+		player->frames++;
+		if ((!ft_strncmp(player->end, "win", 3) && player->wait
+				>= PLAYER_SPEED * 5) || !ft_strncmp(player->end, "death", 3))
+			ft_end_animation(player);
 	}
 }
 
 void	ft_play(t_player *player)
 {
-	int	width;
-	int	height;
-
-	width = ft_strlen(player->map[0]) * RES;
-	height = ft_count_c(player->map, 0) / ft_strlen(player->map[0]) * RES;
-	player->mlx = mlx_init(width, height, "Narsil Reforge", true);
+	player->mlx = mlx_init(ft_strlen(player->map[0]) * RES,
+			ft_count_c(player->map, 0) / ft_strlen(player->map[0]) * RES,
+			"so_long_bonus", true);
 	if (!player->mlx)
 		ft_mlxerror(player);
 	ft_strrchr(player->sprite_path, '/')[1] = 0;
 	ft_render_background(player);
-	player->x = ft_get_pos(player->map, 'P') % ft_strlen(player->map[0]);
-	player->y = ft_get_pos(player->map, 'P') / ft_strlen(player->map[0]);
-	ft_render_player(player);
-	player->moves = 0;
-	player->collects = 0;
-	player->all_collects = (unsigned int)ft_count_c(player->map, 'C');
-	mlx_key_hook(player->mlx, &ft_keyhook, player);
+	ft_init_player(player);
+	if (ft_count_c(player->map, 'E') != 0)
+		ft_init_enemies(player);
+	ft_render_counters(player);
+	mlx_loop_hook(player->mlx, &ft_hook, player);
 	mlx_loop(player->mlx);
 	ft_printf("\nYou closed the window.\n\n");
 	ft_terminate_free(player, 0);

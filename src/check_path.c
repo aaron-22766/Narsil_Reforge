@@ -6,11 +6,11 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:38:11 by arabenst          #+#    #+#             */
-/*   Updated: 2023/01/23 10:48:35 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/01/24 14:59:09 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	ft_get_pos(char **map, char c)
 {
@@ -71,7 +71,7 @@ void	ft_check_path(t_player *player)
 		j = -1;
 		while (player->map[i][++j])
 		{
-			if (ft_strchr("CE", player->map[i][j]))
+			if (ft_strchr("CX", player->map[i][j]))
 			{
 				pos = i * ft_strlen(player->map[0]) + j;
 				vis = ft_calloc(ft_count_c(player->map, 0) + 1, sizeof(char));

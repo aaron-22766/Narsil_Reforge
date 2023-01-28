@@ -6,18 +6,18 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:14:21 by arabenst          #+#    #+#             */
-/*   Updated: 2023/01/23 10:48:38 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/01/26 11:24:11 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static void	ft_puterror(const char *fault, const char *expectation)
 {
 	if (ft_strlen(expectation) == 0)
-		ft_printf("\nERROR!\n%s\n", fault);
+		ft_printf("\nERROR!\n%s\n\n", fault);
 	else
-		ft_printf("\nERROR!\n%s Expected: %s\n", fault, expectation);
+		ft_printf("\nERROR!\n%s Expected: %s\n\n", fault, expectation);
 	exit(1);
 }
 
@@ -51,7 +51,7 @@ void	ft_ferror(char code, t_player *player)
 	else if (code == 15)
 		ft_puterror("Map does not contain a collectible (C)!", "At least 1");
 	else if (code == 16)
-		ft_puterror("Map has too few or too many exits (E)!", "1");
+		ft_puterror("Map has too few or too many exits (X)!", "1");
 	else if (code == 17)
 		ft_puterror("Map has too few or too many starting positions (P)!", "1");
 	else if (code == 18)
@@ -60,6 +60,13 @@ void	ft_ferror(char code, t_player *player)
 		ft_puterror("No valid path to all collectibles and/or the exit!", "");
 	else if (code == 20)
 		ft_puterror("Input file is empty!", "");
+}
+
+void	ft_terror(char code, t_player *player)
+{
+	if (code == 0)
+		ft_puterror("Something went wrong! (perhaps memory allocation)", "");
+	ft_terminate_free(player, 1);
 }
 
 void	ft_mlxerror(t_player *player)
