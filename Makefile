@@ -69,6 +69,7 @@ fclean: clean
 
 libclean: fclean
 	$(RM) -R $(RMFLAGS) $(LIBDIR)
+	if [ -d $(LIBDIR) ]; then $(RM) -R $(RMFLAGS) $(LIBDIR); fi
 
 re: fclean all
 
