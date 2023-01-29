@@ -21,6 +21,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <time.h>
 # include "../lib/mlx/include/MLX42/MLX42.h"
 # include "../lib/libft/libft.h"
 

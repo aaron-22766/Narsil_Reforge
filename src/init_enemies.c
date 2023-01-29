@@ -33,6 +33,7 @@ static void	ft_random_enemy_text(t_player *player, t_enemy **enemies)
 	int	random;
 
 	random = 0;
+	srand(time(0));
 	if (ft_count_c(player->map, 'E') > 1)
 		random = rand() % (ft_count_c(player->map, 'E') - 1);
 	enemies[random]->num = "1";
