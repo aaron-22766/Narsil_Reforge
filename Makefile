@@ -73,7 +73,7 @@ libclean: fclean
 
 re: fclean all
 
-testall: maps/*/* | $(NAME)
+testall: maps/*/* maps/* | $(NAME)
 	@for file in $^ ; do \
 		echo "\nRUNNING: " $${file} ; \
 		./$(NAME) $${file} ; \

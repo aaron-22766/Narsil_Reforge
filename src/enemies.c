@@ -85,6 +85,7 @@ static void	ft_enemies_iteri(t_player *player,
 	i = -1;
 	while (player->enemies[++i])
 	{
+		ft_printf("dir: %i\n", player->enemies[i]->dir);
 		if (player->enemies[i]->dir != -1)
 			f(player, player->enemies[i]);
 	}
