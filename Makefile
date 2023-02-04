@@ -6,9 +6,11 @@
 #    By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/14 17:40:26 by arabenst          #+#    #+#              #
-#    Updated: 2023/01/26 14:34:00 by arabenst         ###   ########.fr        #
+#    Updated: 2023/02/04 18:50:02 by arabenst         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# brew install cmake
 
 NAME		=	Narsil_Reforge
 
@@ -43,7 +45,7 @@ $(LIBFT): $(LIBDIR)
 	git clone https://github.com/aaron-22766/libft.git $(LIBFT_DIR); make -C $(LIBFT_DIR)
 
 $(MLX): $(LIBDIR)
-	git clone https://github.com/codam-coding-college/MLX42 $(MLX_DIR); make -C $(MLX_DIR)
+	git clone https://github.com/codam-coding-college/MLX42 $(MLX_DIR); (cd $(MLX_DIR) && cmake -B . && make -j4)
 
 $(LIBDIR):
 	mkdir -p $(LIBDIR)
@@ -60,12 +62,12 @@ clean:
 	$(RM) $(RMFLAGS) $(wildcard $(OBJDIR)/*.o)
 	if [ -d $(OBJDIR) ]; then $(RM) -R $(RMFLAGS) $(OBJDIR); fi
 	make -C $(LIBFT_DIR) clean
-	make -C $(MLX_DIR) clean
+	make -C $(MLX_DIR) clean/fast
 
 fclean: clean
 	$(RM) $(RMFLAGS) $(NAME)
 	make -C $(LIBFT_DIR) fclean
-	make -C $(MLX_DIR) fclean
+	make -C $(MLX_DIR) clean
 
 libclean: fclean
 	$(RM) -R $(RMFLAGS) $(LIBDIR)
