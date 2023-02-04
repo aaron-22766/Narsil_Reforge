@@ -6,7 +6,7 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:23:07 by arabenst          #+#    #+#             */
-/*   Updated: 2023/01/27 14:39:27 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/04 18:15:33 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,10 @@
 # define N_W 10
 // N_W = Width of UI numbers
 # define PLAYER_SPEED 2
-# define MULTIPLIER 2
-// Speeds up player movement by number when holding key
+# define SPRINT_SPEED 4
 # define ENEMY_SPEED 1
 // RES % X_SPEED == 0 !!
-# define END_ANI 160
+# define END_ANI 128
 // Duration of the end animation in frames
 # define ANI_FRAMES 16
 // Number of frames in animation
@@ -72,6 +71,7 @@ typedef struct s_player
 	int				wait;
 	int				key_down;
 	int				key_hold;
+	int				speed;
 	int				x;
 	int				y;
 	int				dir;

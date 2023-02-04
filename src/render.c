@@ -6,7 +6,7 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:19:40 by arabenst          #+#    #+#             */
-/*   Updated: 2023/01/27 12:44:48 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/04 18:16:50 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	ft_init_player(t_player *player)
 	player->collects = 0;
 	player->moves = 0;
 	player->dir = 1;
+	player->speed = PLAYER_SPEED;
 	player->frames = 0;
 	player->wait = 0;
 	player->end = 0;
@@ -99,6 +100,7 @@ void	ft_render_counters(t_player *player)
 {
 	mlx_image_t	*shards_img;
 	mlx_image_t	*player_img;
+	char		*file_name;
 
 	player->moves_ui = ft_calloc(sizeof(mlx_image_t *), 11);
 	if (!player->moves_ui)
@@ -113,7 +115,9 @@ void	ft_render_counters(t_player *player)
 	if (!player->collects_ui)
 		ft_terror(0, player);
 	ft_collects_ui(player);
-	player_img = ft_get_img(player, ft_get_dir_file_name(player, "Player", 1));
+	file_name = ft_get_dir_file_name(player, "Player", 1);
+	player_img = ft_get_img(player, file_name);
+	free(file_name);
 	if (mlx_image_to_window(player->mlx, player_img, 0, (ft_count_c(player->map,
 					0) / ft_strlen(player->map[0]) - 1) * RES) < 0)
 		ft_mlxerror(player);

@@ -6,7 +6,7 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:07:29 by arabenst          #+#    #+#             */
-/*   Updated: 2023/01/27 13:45:43 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:42:13 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ static void	ft_enemies_iteri(t_player *player,
 	i = -1;
 	while (player->enemies[++i])
 	{
-		ft_printf("dir: %i\n", player->enemies[i]->dir);
 		if (player->enemies[i]->dir != -1)
 			f(player, player->enemies[i]);
 	}
@@ -94,8 +93,14 @@ static void	ft_enemies_iteri(t_player *player,
 void	ft_enemies(t_player *player)
 {
 	t_enemy	*enemy;
+	int		i;
 
-	enemy = player->enemies[0];
+	i = 0;
+	while (player->enemies[i] && player->enemies[i]->dir == -1)
+		i++;
+	if (!player->enemies[i])
+		return ;
+	enemy = player->enemies[i];
 	if (enemy->img->instances[0].x == enemy->x * RES
 		&& enemy->img->instances[0].y == enemy->y * RES)
 		ft_enemies_iteri(player, &ft_new_enemy_target);

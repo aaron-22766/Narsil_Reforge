@@ -6,7 +6,7 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:41:06 by arabenst          #+#    #+#             */
-/*   Updated: 2023/01/27 14:33:19 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:42:51 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	ft_key_press(t_player *player)
 		ft_printf("\nYou closed the window using the ESC key.\n\n");
 		ft_terminate_free(player, 0);
 	}
-	else if (mlx_is_key_down(player->mlx, MLX_KEY_UP)
+	if (mlx_is_key_down(player->mlx, MLX_KEY_UP)
 		|| mlx_is_key_down(player->mlx, MLX_KEY_W))
 		ft_move_key(player, 0, -1);
 	else if (mlx_is_key_down(player->mlx, MLX_KEY_DOWN)
@@ -40,6 +40,12 @@ static void	ft_key_press(t_player *player)
 	else if (mlx_is_key_down(player->mlx, MLX_KEY_RIGHT)
 		|| mlx_is_key_down(player->mlx, MLX_KEY_D))
 		ft_move_key(player, 1, 0);
+	if (mlx_is_key_down(player->mlx, MLX_KEY_LEFT_SHIFT)
+		&& player->img->instances[0].x % SPRINT_SPEED == 0
+		&& player->img->instances[0].y % SPRINT_SPEED == 0)
+		player->speed = SPRINT_SPEED;
+	else
+		player->speed = PLAYER_SPEED;
 }
 
 static void	ft_hook(void *param)
@@ -59,16 +65,7 @@ static void	ft_hook(void *param)
 		ft_animate_player_move(player);
 	if (player->moves && ft_count_c(player->map, 'E') > 0 && !player->end)
 		ft_enemies(player);
-	if (player->end)
-	{
-		player->wait++;
-		if (player->frames == END_ANI)
-			player->frames = 0;
-		player->frames++;
-		if ((!ft_strncmp(player->end, "win", 3) && player->wait
-				>= PLAYER_SPEED * 5) || !ft_strncmp(player->end, "death", 3))
-			ft_end_animation(player);
-	}
+	ft_end_animation(player);
 }
 
 void	ft_play(t_player *player)

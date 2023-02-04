@@ -6,27 +6,37 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:21:41 by arabenst          #+#    #+#             */
-/*   Updated: 2023/01/27 14:45:28 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:40:54 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
+void	ft_end_message(t_player *player)
+{
+	if (!ft_strncmp(player->end, "death", 5))
+		ft_printf("\nAragorn died at the hand of a Nazgul!\n\n");
+	else if (!ft_strncmp(player->end, "win", 3))
+	{
+		ft_printf("\nAgorel vae, mellon nin! ");
+		ft_printf("Aragorn was able to reforge the sword.\n\n");
+	}
+	ft_terminate_free(player, 0);
+}
+
 void	ft_end_animation(t_player *player)
 {
 	char	*file_name;
 
+	if (!player->end)
+		return ;
+	player->wait++;
+	if (!((!ft_strncmp(player->end, "win", 3) && player->wait
+				>= RES / PLAYER_SPEED) || !ft_strncmp(player->end, "death", 3)))
+		return ;
 	if (player->frames == END_ANI)
-	{
-		if (!ft_strncmp(player->end, "death", 5))
-			ft_printf("\nAragorn died at the hand of a Nazgul!\n\n");
-		else if (!ft_strncmp(player->end, "win", 3))
-		{
-			ft_printf("\nAgorel vae, mellon nin! ");
-			ft_printf("Aragorn was able to reforge the sword.\n\n");
-		}
-		ft_terminate_free(player, 0);
-	}
+		ft_end_message(player);
+	player->frames++;
 	if (player->frames % (END_ANI / ANI_FRAMES) != 0)
 		return ;
 	file_name = ft_get_ani_file_name(player);
@@ -40,21 +50,14 @@ void	ft_end_animation(t_player *player)
 
 void	ft_animate_player_move(t_player *player)
 {
-	int	speed;
-
-	speed = PLAYER_SPEED;
-	if (player->img->instances[0].x % (speed * MULTIPLIER) == 0
-		&& player->img->instances[0].y % (speed * MULTIPLIER) == 0
-		&& player->key_hold > RES)
-		speed *= MULTIPLIER;
 	if (player->img->instances[0].x < player->x * RES)
-		player->img->instances[0].x += speed;
+		player->img->instances[0].x += player->speed;
 	else if (player->img->instances[0].x > player->x * RES)
-		player->img->instances[0].x -= speed;
+		player->img->instances[0].x -= player->speed;
 	if (player->img->instances[0].y < player->y * RES)
-		player->img->instances[0].y += speed;
+		player->img->instances[0].y += player->speed;
 	else if (player->img->instances[0].y > player->y * RES)
-		player->img->instances[0].y -= speed;
+		player->img->instances[0].y -= player->speed;
 }
 
 void	ft_animate_enemy(t_player *player, t_enemy *enemy)
