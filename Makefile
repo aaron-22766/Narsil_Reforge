@@ -6,7 +6,7 @@
 #    By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/14 17:40:26 by arabenst          #+#    #+#              #
-#    Updated: 2023/02/04 18:50:02 by arabenst         ###   ########.fr        #
+#    Updated: 2023/02/04 19:35:32 by arabenst         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,12 @@ $(MLX): $(LIBDIR)
 
 $(LIBDIR):
 	mkdir -p $(LIBDIR)
+ifeq ($(shell which brew),$(HOME)/.brew/bin/brew)
+	brew install glfw
+	brew install cmake
+else
+	@echo "Please install brew!"
+endif
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	$(CC) -c $(CFLAGS) $< -o $@
