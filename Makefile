@@ -6,11 +6,9 @@
 #    By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/14 17:40:26 by arabenst          #+#    #+#              #
-#    Updated: 2023/02/04 19:35:32 by arabenst         ###   ########.fr        #
+#    Updated: 2023/02/04 19:43:08 by arabenst         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-# brew install cmake
 
 NAME		=	Narsil_Reforge
 
@@ -88,4 +86,4 @@ testall: maps/*/* maps/* | $(NAME)
 	done
 	@echo "\n\n\n\n\nEND OF TEST"
 
-.PHONY: all clean fclean re testall
+.PHONY: all clean fclean libclean re testall
