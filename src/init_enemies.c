@@ -6,7 +6,7 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:35:07 by arabenst          #+#    #+#             */
-/*   Updated: 2023/02/04 17:38:27 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/04 20:43:44 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ static t_enemy	*ft_new_enemy(t_player *player, int x, int y)
 		ft_terror(0, player);
 	enemy->x = x;
 	enemy->y = y;
-	enemy->dir = rand() % 4;
-	if (player->map[y + 1][x] == '1' && player->map[y - 1][x] == '1'
-		&& player->map[y][x + 1] == '1' && player->map[y][x - 1] == '1')
-		enemy->dir = 2;
+	enemy->dir = 2;
 	enemy->img = 0;
 	enemy->num = "2";
 	ft_update_enemy_img(player, enemy);
