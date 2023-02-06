@@ -6,7 +6,7 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:19:40 by arabenst          #+#    #+#             */
-/*   Updated: 2023/02/04 20:37:40 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:20:57 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ mlx_image_t	*ft_get_img(t_player *player, char *file_name)
 	if (!text)
 		ft_mlxerror(player);
 	img = mlx_texture_to_image(player->mlx, text);
+	mlx_delete_texture(text);
 	if (!img)
 		ft_mlxerror(player);
 	return (img);

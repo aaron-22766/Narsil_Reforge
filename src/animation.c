@@ -6,7 +6,7 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:21:41 by arabenst          #+#    #+#             */
-/*   Updated: 2023/02/06 12:15:08 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:35:30 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	ft_end_animation(t_player *player)
 	player->frames++;
 	if (player->frames % (END_ANI / ANI_FRAMES) != 0)
 		return ;
-	file_name = ft_get_ani_file_name(player);
 	mlx_delete_image(player->mlx, player->ani_img);
+	file_name = ft_get_ani_file_name(player);
 	player->ani_img = ft_get_img(player, file_name);
 	free(file_name);
 	if (mlx_image_to_window(player->mlx, player->ani_img, player->x * RES - RES,

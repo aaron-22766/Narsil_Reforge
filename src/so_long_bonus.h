@@ -6,7 +6,7 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:23:07 by arabenst          #+#    #+#             */
-/*   Updated: 2023/02/04 18:15:33 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:22:44 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ typedef struct s_player
 	int				frames;
 	int				wait;
 	int				key_down;
-	int				key_hold;
 	int				speed;
 	int				x;
 	int				y;

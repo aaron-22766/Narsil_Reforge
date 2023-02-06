@@ -6,7 +6,7 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:41:06 by arabenst          #+#    #+#             */
-/*   Updated: 2023/02/06 12:11:02 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:22:37 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,6 @@ static void	ft_hook(void *param)
 	player = param;
 	player->key_down = 0;
 	ft_key_press(player);
-	if (player->key_down)
-		player->key_hold++;
-	else
-		player->key_hold = 0;
 	if ((player->img->instances[0].x != player->x * RES
 			|| player->img->instances[0].y != player->y * RES)
 		&& player->key_down == 0)

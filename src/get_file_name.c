@@ -6,7 +6,7 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 12:38:45 by arabenst          #+#    #+#             */
-/*   Updated: 2023/02/01 16:48:51 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:39:27 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,12 @@ char	*ft_get_ani_file_name(t_player *player)
 		ft_terror(0, player);
 	ft_strlcpy(file_name, player->end, size);
 	ft_strlcat(file_name, "_", size);
-	frame_num = ft_calloc(ft_count_digits(frame) + 2, sizeof(char));
+	frame_num = ft_itoa(frame);
 	if (!frame_num)
 	{
 		free(file_name);
 		ft_terror(0, player);
 	}
-	frame_num = ft_itoa(frame);
 	ft_strlcat(file_name, frame_num, size);
 	free(frame_num);
 	return (file_name);

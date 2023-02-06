@@ -6,7 +6,7 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:24:03 by arabenst          #+#    #+#             */
-/*   Updated: 2023/02/01 14:32:59 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:41:36 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	ft_terminate_free(t_player *player, int err)
 	mlx_close_window(player->mlx);
 	mlx_terminate(player->mlx);
 	ft_free_player(player);
+	// system("leaks so_long_bonus");
 	exit(err);
 }
