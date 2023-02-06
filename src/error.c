@@ -6,7 +6,7 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:14:21 by arabenst          #+#    #+#             */
-/*   Updated: 2023/01/26 11:24:11 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/06 12:33:24 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_ferror(char code, t_player *player)
 	else if (code == 13)
 		ft_puterror("Map does not have enough rows!", "At least 3");
 	else if (code == 14)
-		ft_puterror("Map contains a non-permitted character!", "Only '10CEP'");
+		ft_puterror("Map contains a non-permitted character!", "Only '10PXCE'");
 	else if (code == 15)
 		ft_puterror("Map does not contain a collectible (C)!", "At least 1");
 	else if (code == 16)

@@ -6,7 +6,7 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:00:13 by arabenst          #+#    #+#             */
-/*   Updated: 2023/02/04 18:15:40 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/06 12:23:54 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,18 @@ void	ft_move(t_player *player, int x, int y)
 {
 	int	prev_dir;
 
+	if (!player->end)
+	{
+		prev_dir = player->dir;
+		player->dir = y + 1 + ft_to_power(x - 1, 2) + (x - 1);
+		if (prev_dir != player->dir)
+			ft_update_player_img(player);
+	}
 	if (player->map[player->y + y][player->x + x] == '1' || player->end)
 		return ;
 	player->x += x;
 	player->y += y;
 	++player->moves;
-	prev_dir = player->dir;
-	player->dir = y + 1 + ft_to_power(x - 1, 2) + (x - 1);
-	if (prev_dir != player->dir)
-		ft_update_player_img(player);
 	ft_moves_ui(player);
 	ft_on_collect(player);
 	ft_on_exit(player);

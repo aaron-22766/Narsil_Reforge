@@ -6,7 +6,7 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:21:41 by arabenst          #+#    #+#             */
-/*   Updated: 2023/02/01 16:40:54 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/06 12:15:08 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_end_message(t_player *player)
 	else if (!ft_strncmp(player->end, "win", 3))
 	{
 		ft_printf("\nAgorel vae, mellon nin! ");
-		ft_printf("Aragorn was able to reforge the sword.\n\n");
+		ft_printf("Narsil could be reforged and is now called Anduril.\n\n");
 	}
 	ft_terminate_free(player, 0);
 }
