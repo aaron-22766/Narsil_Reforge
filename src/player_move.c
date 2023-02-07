@@ -6,11 +6,11 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:00:13 by arabenst          #+#    #+#             */
-/*   Updated: 2023/02/06 12:23:54 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:53:27 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long_bonus.h"
+#include "Narsil_Reforge.h"
 
 static void	ft_on_collect(t_player *player)
 {

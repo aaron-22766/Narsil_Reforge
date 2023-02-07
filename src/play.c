@@ -6,11 +6,11 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:41:06 by arabenst          #+#    #+#             */
-/*   Updated: 2023/02/06 15:22:37 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:53:24 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long_bonus.h"
+#include "Narsil_Reforge.h"
 
 static void	ft_move_key(t_player *player, int x, int y)
 {
@@ -68,7 +68,7 @@ void	ft_play(t_player *player)
 {
 	player->mlx = mlx_init(ft_strlen(player->map[0]) * RES,
 			ft_count_c(player->map, 0) / ft_strlen(player->map[0]) * RES,
-			"so_long_bonus", true);
+			"Narsil_Reforge", true);
 	if (!player->mlx)
 		ft_mlxerror(player);
 	ft_strrchr(player->sprite_path, '/')[1] = 0;

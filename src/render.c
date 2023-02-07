@@ -6,11 +6,11 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:19:40 by arabenst          #+#    #+#             */
-/*   Updated: 2023/02/06 15:20:57 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:53:30 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long_bonus.h"
+#include "Narsil_Reforge.h"
 
 mlx_image_t	*ft_get_img(t_player *player, char *file_name)
 {
