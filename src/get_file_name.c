@@ -59,7 +59,7 @@ char	*ft_get_ani_file_name(t_player *player)
 	int		size;
 	int		frame;
 
-	frame = player->frames / (END_ANI / ANI_FRAMES);
+	frame = player->ani_frames / (END_ANI / ANI_FRAMES);
 	size = ft_strlen(player->end) + ft_count_digits(frame) + 3;
 	file_name = ft_calloc(size, sizeof(char));
 	if (!file_name)

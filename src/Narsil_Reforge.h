@@ -29,6 +29,9 @@
 /*                                  DEFINES                                   */
 /* ************************************************************************** */
 
+# define DISPLAY_FPS 120
+# define GAME_FPS 60
+// DISPLAY_FPS % GAME_FPS == 0 !!
 # define RES 32
 # define N_H 16
 // N_H = Height of UI numbers
@@ -68,6 +71,7 @@ typedef struct s_player
 	char			*sprite_path;
 	char			*end;
 	int				frames;
+	int				ani_frames;
 	int				wait;
 	int				key_down;
 	int				speed;

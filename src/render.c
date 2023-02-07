@@ -87,6 +87,7 @@ void	ft_init_player(t_player *player)
 	player->dir = 1;
 	player->speed = PLAYER_SPEED;
 	player->frames = 0;
+	player->ani_frames = 0;
 	player->wait = 0;
 	player->end = 0;
 	player->enemies = 0;

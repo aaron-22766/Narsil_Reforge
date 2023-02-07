@@ -34,10 +34,10 @@ void	ft_end_animation(t_player *player)
 	if (!((!ft_strncmp(player->end, "win", 3) && player->wait
 				>= RES / PLAYER_SPEED) || !ft_strncmp(player->end, "death", 3)))
 		return ;
-	if (player->frames == END_ANI)
+	if (player->ani_frames == END_ANI)
 		ft_end_message(player);
-	player->frames++;
-	if (player->frames % (END_ANI / ANI_FRAMES) != 0)
+	player->ani_frames++;
+	if (player->ani_frames % (END_ANI / ANI_FRAMES) != 0)
 		return ;
 	mlx_delete_image(player->mlx, player->ani_img);
 	file_name = ft_get_ani_file_name(player);

@@ -53,6 +53,11 @@ static void	ft_hook(void *param)
 	t_player	*player;
 
 	player = param;
+	player->frames++;
+	if (player->frames % (DISPLAY_FPS / GAME_FPS) != 0)
+		return;
+	if (player->frames == (DISPLAY_FPS / GAME_FPS))
+		player->frames = 0;
 	player->key_down = 0;
 	ft_key_press(player);
 	if ((player->img->instances[0].x != player->x * RES
