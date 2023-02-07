@@ -6,7 +6,7 @@
 #    By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/14 17:40:26 by arabenst          #+#    #+#              #
-#    Updated: 2023/02/04 19:43:08 by arabenst         ###   ########.fr        #
+#    Updated: 2023/02/07 14:41:31 by arabenst         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ MLX_LIB		= libmlx42.a
 MLX			= $(MLX_DIR)/$(MLX_LIB)
 
 ARCS		=	$(LIBFT) $(MLX)
-GLFW		=	-lglfw -L "$(HOME)/.brew/Cellar/glfw/3.3.8/lib"
+GLFW		=	-lglfw -L "$(HOME)/.brew/opt/glfw/lib/"
 
 $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	$(CC) -o $(NAME) $(CFLAGS) $(OBJS) $(ARCS) $(GLFW)
