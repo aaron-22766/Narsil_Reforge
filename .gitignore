@@ -1,7 +1,4 @@
 lib
-*obj
-so_long
-so_long_bonus
-so_long_bonus.dSYM/
+obj
 .DS_Store
-Narsil_Reforge
+Narsil_Reforge*

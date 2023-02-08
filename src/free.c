@@ -34,6 +34,6 @@ void	ft_terminate_free(t_player *player, int err)
 	mlx_close_window(player->mlx);
 	mlx_terminate(player->mlx);
 	ft_free_player(player);
-	// system("leaks so_long_bonus");
+	// system("leaks Narsil_Reforge");
 	exit(err);
 }
