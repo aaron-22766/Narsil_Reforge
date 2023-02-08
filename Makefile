@@ -6,7 +6,7 @@
 #    By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/14 17:40:26 by arabenst          #+#    #+#              #
-#    Updated: 2023/02/08 13:22:39 by arabenst         ###   ########.fr        #
+#    Updated: 2023/02/08 14:18:54 by arabenst         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra
 
 RM			=	rm
-RMFLAGS		=	-f
+RMFLAGS		=	-Rf
 
 LIBFT_DIR	=	$(LIBDIR)/libft
 LIBFT_LIB	=	libft.a
@@ -75,8 +75,7 @@ $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
 clean:
-	$(RM) $(RMFLAGS) $(wildcard $(OBJDIR)/*.o)
-	if [ -d $(OBJDIR) ]; then $(RM) -R $(RMFLAGS) $(OBJDIR); fi
+	$(RM) $(RMFLAGS) $(OBJDIR)
 	make -C $(LIBFT_DIR) clean
 	make -C $(MLX_DIR) clean/fast
 
@@ -85,9 +84,10 @@ fclean: clean
 	make -C $(LIBFT_DIR) fclean
 	make -C $(MLX_DIR) clean
 
-libclean: fclean
-	$(RM) -R $(RMFLAGS) $(LIBDIR)
-	if [ -d $(LIBDIR) ]; then $(RM) -R $(RMFLAGS) $(LIBDIR); fi
+libclean:
+	$(RM) $(RMFLAGS) $(LIBDIR)
+
+flibclean: fclean libclean
 
 re: fclean all
 
