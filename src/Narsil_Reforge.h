@@ -6,7 +6,7 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:23:07 by arabenst          #+#    #+#             */
-/*   Updated: 2023/02/07 14:52:28 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/02/08 09:02:24 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@
 /*                                  DEFINES                                   */
 /* ************************************************************************** */
 
-# define DISPLAY_FPS 120
+# ifndef DISPLAY_FPS
+#  define DISPLAY_FPS 60
+# endif
 # define GAME_FPS 60
 // DISPLAY_FPS % GAME_FPS == 0 !!
 # define RES 32

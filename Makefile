@@ -6,11 +6,12 @@
 #    By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/14 17:40:26 by arabenst          #+#    #+#              #
-#    Updated: 2023/02/07 14:41:31 by arabenst         ###   ########.fr        #
+#    Updated: 2023/02/08 10:32:48 by arabenst         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	Narsil_Reforge
+120_NAME	=	Narsil_Reforge_120
 
 SRCDIR		=	./src
 OBJDIR		=	./obj
@@ -18,6 +19,7 @@ LIBDIR		=	./lib
 
 SRCS		=	$(wildcard $(SRCDIR)/*.c)
 OBJS		=	$(addprefix $(OBJDIR)/,$(notdir $(SRCS:.c=.o)))
+120_OBJS	=	$(addprefix $(OBJDIR)/@120_,$(notdir $(SRCS:.c=.o)))
 
 CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra
@@ -36,8 +38,17 @@ MLX			= $(MLX_DIR)/$(MLX_LIB)
 ARCS		=	$(LIBFT) $(MLX)
 GLFW		=	-lglfw -L "$(HOME)/.brew/opt/glfw/lib/"
 
+all: 60
+
+60: $(NAME)
+
+120: $(120_NAME)
+
 $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	$(CC) -o $(NAME) $(CFLAGS) $(OBJS) $(ARCS) $(GLFW)
+
+$(120_NAME): $(LIBFT) $(MLX) $(120_OBJS)
+	$(CC) -o $(120_NAME) $(CFLAGS) -D DISPLAY_FPS=120 $(120_OBJS) $(ARCS) $(GLFW)
 
 $(LIBFT): $(LIBDIR)
 	git clone https://github.com/aaron-22766/libft.git $(LIBFT_DIR); make -C $(LIBFT_DIR)
@@ -54,13 +65,14 @@ else
 	@echo "Please install brew!"
 endif
 
+$(OBJDIR)/@120_%.o: $(SRCDIR)/%.c | $(OBJDIR)
+	$(CC) -c $(CFLAGS) -D DISPLAY_FPS=120 $< -o $@
+
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	$(CC) -c $(CFLAGS) $< -o $@
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
-
-all: $(NAME)
 
 clean:
 	$(RM) $(RMFLAGS) $(wildcard $(OBJDIR)/*.o)
@@ -69,7 +81,7 @@ clean:
 	make -C $(MLX_DIR) clean/fast
 
 fclean: clean
-	$(RM) $(RMFLAGS) $(NAME)
+	$(RM) $(RMFLAGS) $(NAME) $(120_NAME)
 	make -C $(LIBFT_DIR) fclean
 	make -C $(MLX_DIR) clean
 
