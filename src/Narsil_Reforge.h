@@ -6,7 +6,7 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:23:07 by arabenst          #+#    #+#             */
-/*   Updated: 2023/03/01 11:55:54 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/03/13 15:49:05 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <fcntl.h>
 # include <time.h>
 # include "../lib/mlx/include/MLX42/MLX42.h"
-# include "../lib/libft/src/libft.h"
+# include "../lib/libft/libft.h"
 
 /* ************************************************************************** */
 /*                                  DEFINES                                   */
