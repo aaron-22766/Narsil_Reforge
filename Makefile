@@ -6,7 +6,7 @@
 #    By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/14 17:40:26 by arabenst          #+#    #+#              #
-#    Updated: 2023/02/08 14:18:54 by arabenst         ###   ########.fr        #
+#    Updated: 2023/04/05 21:32:33 by arabenst         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,6 @@ SRCS		=	$(wildcard $(SRCDIR)/*.c)
 OBJS		=	$(addprefix $(OBJDIR)/,$(notdir $(SRCS:.c=.o)))
 
 DISPLAY_FPS	=	-D DISPLAY_FPS=$(shell if [[ $$(system_profiler SPDisplaysDataType | grep "Display Type: Built-in Liquid Retina XDR Display") ]]; then echo 120; else echo 60; fi)
-
-# $(shell if [[ $$(system_profiler SPDisplaysDataType | awk '/Display Type: / {print $$3 $$4 $$5 $$6 $$7}') == "Built-inLiquidRetinaXDRDisplay" ]]; then echo 120; else echo 60; fi)
 
 CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra $(DISPLAY_FPS)
