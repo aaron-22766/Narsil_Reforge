@@ -1,7 +1,6 @@
 # Narsil_Reforge
 #### Continuation of so_long project in the theme of Lord of the Rings
 
+https://user-images.githubusercontent.com/79376206/235120994-07236608-dfcc-4a96-a903-93d6db0fc260.mp4
 
-
-[![Demo of Gameplay](https://img.youtube.com/vi/gWYI-ZKPhq4/maxresdefault.jpg)](https://www.youtube.com/watch?v=gWYI-ZKPhq4)
-Demo of Gameplay -> YouTube
+For a full-res version check out the video on [YouTube](https://www.youtube.com/watch?v=gWYI-ZKPhq4).
