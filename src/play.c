@@ -6,7 +6,7 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:41:06 by arabenst          #+#    #+#             */
-/*   Updated: 2023/03/31 15:12:53 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/04/22 12:41:20 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	ft_hook(void *param)
 	player = param;
 	player->frames++;
 	if (player->frames % (DISPLAY_FPS / GAME_FPS) != 0)
-		return;
+		return ;
 	if (player->frames == (DISPLAY_FPS / GAME_FPS))
 		player->frames = 0;
 	player->key_down = 0;
