@@ -6,7 +6,7 @@
 /*   By: arabenst <arabenst@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 00:40:08 by W2Wizard          #+#    #+#             */
-/*   Updated: 2023/03/30 16:38:19 by arabenst         ###   ########.fr       */
+/*   Updated: 2023/07/13 16:51:24 by arabenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,15 @@ static char	**ft_realloc_map(char **ptr, size_t count)
 	return (new);
 }
 
-static char	**ft_get_map(int fd)
+static char	**ft_get_map(char *path)
 {
+	int		fd;
 	size_t	i;
 	char	**map;
 
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		ft_error(3);
 	map = 0;
 	i = 0;
 	while (1)
@@ -50,6 +54,7 @@ static char	**ft_get_map(int fd)
 			ft_strchr(map[i], '\n')[0] = 0;
 		i++;
 	}
+	close(fd);
 	return (map);
 }
 
@@ -64,17 +69,12 @@ static void	ft_check_args(int argc, char **argv)
 int	main(int argc, char **argv)
 {
 	t_player	*player;
-	int			fd;
 
 	ft_check_args(argc, argv);
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		ft_error(3);
 	player = malloc(sizeof(t_player));
 	if (!player)
 		ft_error(0);
-	player->map = ft_get_map(fd);
-	close(fd);
+	player->map = ft_get_map(argv[1]);
 	player->enemies = 0;
 	player->moves_ui = 0;
 	player->collects_ui = 0;
